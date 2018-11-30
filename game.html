@@ -1,45 +1,84 @@
 <!DOCTYPE html>
+<html>
+
 <head>
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script src="js/lib/babylon.1.14-beta-debug.js"></script>
-    <script src="js/lib/jquery-2.1.1.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>BabylonJS example</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font: 10pt Arial;
+        }
 
-    <script src="maps/level1.js"></script>
+        canvas {
+            outline: none;
+        }
 
-    <script src="js/Game.js"></script>
-    <script src="js/utils/Preloader.js"></script>
-    <script src="js/utils/Utils.js"></script>
-    <script src="js/utils/Timer.js"></script>
+        .container {
+            width: auto;
+            margin: 20px;
+            border: 1px solid #ddd;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+        }
 
-    <script src="js/tiles/Tile.js"></script>
-    <script src="js/tiles/Tile.Switch.js"></script>
-    <script src="js/tiles/Tile.Teleporter.js"></script>
-    <script src="js/tiles/Tile.Ender.js"></script>
-    <script src="js/Level.js"></script>
-    <script src="js/Block.js"></script>
+        .style-choice {
+            width: 50%;
+            float: right;
+        }
 
-    <link href='http://fonts.googleapis.com/css?family=Rajdhani:700' rel='stylesheet' type='text/css'>
+        #product-details {
+            width: 50%;
+            float: left;
+        }
+    </style>
+    <!-- Babylon.js -->
+    <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://preview.babylonjs.com/cannon.js"></script>
+    <script src="https://preview.babylonjs.com/Oimo.js"></script>
+    <script src="https://preview.babylonjs.com/gltf_validator.js"></script>
+    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="game.js"></script>
+
 </head>
+
 <body>
-
-    <!-- The loading screen ! -->
-    <div id="loadingWrapper">
-        <div id="loadingValue">
-            0%
+    <div class="container">
+        <h1>Kabisa Jar</h1>
+        <p>The Kabisa Jar is a one of a kind collectors item. You can add as many balls as you like.</p>
+        <div class="style-choice">
+            <strong>Add a ball</strong>
+            <ul id="add-a-ball">
+                <li>Gold</li>
+                <li>Red</li>
+                <li>Silver</li>
+                <li>Cookie</li>
+            </ul>
         </div>
-        <div id="loadingText">
-            Loading in progress...
+
+        <div id="product-detail">
+
         </div>
     </div>
+    <script>
+        $(window).ready(function () {
+            var plugin = $('#product-detail').kabisaMugPreview();
+        });
+    </script>
 
-    <div id="textBack">
-        <div id="text"></div>
-    </div>
-
-    <div id="nbTurnBack">
-        <div id="nbTurn">0</div>
-    </div>
-	<canvas id="renderCanvas"></canvas>
-	
 </body>
+
 </html>
