@@ -4,8 +4,8 @@
 
     var pluginName = "kamilvictor",
         defaults = {
-            width: 300,
-            height: 300,
+            width: 500,
+            height: 500,
             'filename': 'test.babylon'
         };
 
@@ -90,11 +90,22 @@
             metalSilver.cameraExposure = 0.66;
             metalSilver.cameraContrast = 1.66;
 
+            var metalCube = new BABYLON.PBRMaterial("cube", scene);
+            metalCube.reflectionTexture = seamlessTexture;
+            metalCube.microSurface = 0.76;
+            metalCube.reflectivityColor = new BABYLON.Color3(0.6, 0.6, 0.6);
+            metalCube.albedoColor = new BABYLON.Color3(0, 1, 0);
+            metalCube.environmentIntensity = 0.85;
+            metalCube.cameraExposure = 0.66;
+            metalCube.cameraContrast = 1.66;
+
             // Set the material properties so they can be accessed later
             this.gold = metal;
             this.red = metalRed;
             this.silver = metalSilver;
             this.glass = glass;
+            this.cube = metalCube;
+            
 
             // Set the scene up
             scene.clearColor = new BABYLON.Color3(1, 1, 1);
@@ -153,9 +164,10 @@
             decalMaterial.diffuseTexture = new BABYLON.Texture("textures/jackLogo.png", scene);
             decalMaterial.diffuseTexture.hasAlpha = true;
             decalMaterial.zOffset = -2;
+            decalMaterial.diffuseTexture.si
 
-            var decalSize = new BABYLON.Vector3(1, 0.4, 1);
-            var position = new BABYLON.Vector3(1.3, 1.8, 1.5);
+            var decalSize = new BABYLON.Vector3(3, 3, 3);
+            var position = new BABYLON.Vector3(1, 0.5, 1);
             var normal = new BABYLON.Vector3(0.65, 0, 0.75);
             var newDecal = BABYLON.Mesh.CreateDecal("decal", glassCone, position, normal, decalSize);
             newDecal.material = decalMaterial;
@@ -220,8 +232,8 @@
                 case 'argent':
                     this.balls.push(this.createBallObject(this.scene, this.silver, 0));
                     break;
-                case 'glass':
-                    this.balls.push(this.createBallObject(this.scene, this.glass, 0));
+                case 'cube':
+                    this.balls.push(this.createCube(this.scene, this.cube, 0));
                     break;
             }
         },
@@ -242,7 +254,7 @@
             var randomz = Math.random() * (1 - -1) + -1;
 
             ball.material = material;
-            ball.position.y = 2;
+            ball.position.y = 4;
             ball.position.x = randomx / 2;
             ball.position.z = randomz / 2;
             ball.updatePhysicsBody();
@@ -256,6 +268,31 @@
             ball.checkCollisions = 1;
 
             return ball;
+        },
+
+        createCube: function (scene, material, index) {
+
+            var cube = BABYLON.Mesh.CreateBox("cube",0.75, scene);
+
+            var randomx = Math.random() * (1 - -1) + -1;
+            var randomy = Math.random() * (5 - -5) + -5;
+            var randomz = Math.random() * (1 - -1) + -1;
+
+            cube.material = material;
+            cube.position.y = 4;
+            cube.position.x = randomx / 2;
+            cube.position.z = randomz / 2;
+            cube.updatePhysicsBody();
+
+            cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.SphereImpostor,
+                { mass: 1, restitution: 0.1 }, scene);
+
+            cube.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0.1, 0), cube.getAbsolutePosition());
+
+            cube.applyGravity = true;
+            cube.checkCollisions = 1;
+
+            return cube;
         }
     });
 

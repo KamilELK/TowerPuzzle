@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Le pot de Jack</title>
+    <title>Victor Kamil</title>
     <style>
         body {
             padding: 0;
@@ -26,13 +26,66 @@
         }
 
         .style-choice {
-            width: 50%;
-            float: right;
+            width: 250%;
+            float: top;
         }
+        ul {
+            padding:0;
+            margin:0;
+            list-style-type:none;
+        }
+        li {
+            margin-left:2px;
+            float:left; /*pour IE*/
+        }
+        ul li button {
+            display:block;
+            float:left;   
+            width:100px;
+            color:black;
+            text-decoration:none;
+            text-align:center;
+            padding:5px;
+            border:2px solid;
+            /*pour avoir un effet "outset" avec IE :*/
+            border-color:#DCDCDC #696969 #696969 #DCDCDC;
+        }
+        ul li #or {
+            background-color:rgba(206, 171, 16, 0.959);
+            color:black;
+            text-decoration:none;
+            text-align:center;
+            padding:5px;
+        }
+        ul li #argent {
+            background-color:rgb(80, 78, 78);
+            color:black;
+            text-decoration:none;
+            text-align:center;
+            padding:5px;
+        }
+        ul li #rouge {
+            background-color:rgba(240, 12, 12, 0.973);
+            color:black;
+            text-decoration:none;
+            text-align:center;
+            padding:5px;
+        }
+        ul li #cube {
+            background-color:rgba(13, 173, 21, 0.945);
+            color:black;
+            text-decoration:none;
+            text-align:center;
+            padding:5px;
+        }
+        ul li a:hover {
+            background-color:#D3D3D3;
+            border-color:#696969 #DCDCDC #DCDCDC #696969;
+        } 
 
-        #product-details {
-            width: 50%;
-            float: left;
+        .product-details {
+            margin: auto;
+            width: 250px;
         }
     </style>
     <!-- Babylon.js -->
@@ -44,24 +97,25 @@
 
 <body>
     <div class="container">
-        <h1>Le pot de Jack</h1>
+        <h1>Projet Babylon.js</h1>
         <p>Cliquez sur un bouton pour ajouter une boule ou Déplacez le verre avec la souris</p>
         <div class="style-choice">
             <strong>Ajouter une boule en</strong>
             <ul id="add-a-ball">
-                <li><button type="button">or</button></li>
-                <li><button type="button">argent</button></li>
-                <li><button type="button">rouge</button></li>
+                <li><button id="or" type="button">or</button></li>
+                <li><button id="argent" type="button">argent</button></li>
+                <li><button id="rouge" type="button">rouge</button></li>
+                <li><button id="cube" type="button">cube</button></li>
             </ul>
         </div>
 
-        <div id="product-detail">
+        <div class="product-detail">
 
         </div>
     </div>
     <script>
         $(window).ready(function () {
-            var plugin = $('#product-detail').kamilvictor();
+            var plugin = $('.product-detail').kamilvictor();
         });
     </script>
 
