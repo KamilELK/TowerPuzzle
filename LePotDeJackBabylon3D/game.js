@@ -169,12 +169,10 @@
             // Attach the light1 object to the camera so moving te camera also moves the light
             // This makes sure the object looks like it's being turned instead of the camera
             light1.parent = camera;
-
+            var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 0.3, 4.4, 4.4, 50, 1, scene, false);
             // Create the basic model which consists of two cylinders
             // The bottom of the vase
-            var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 0.3, 4.4, 4.4, 50, 1, scene, false);
-            cylinder.material = wood;
-            cylinder.position.y = -2.4;
+            
 
             // The glass cone
             var glassCone = this.createHollowCone(scene, 5, 3.8, 4, 50, glass);
@@ -192,11 +190,6 @@
             var newDecal = BABYLON.Mesh.CreateDecal("decal", glassCone, position, normal, decalSize);
             newDecal.material = decalMaterial;
 
-            // Create the impostors on the cylinder and the cone so the balls will bounce of on them
-            cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor,
-                { mass: 0, restitution: 0 }, scene);
-
-            cylinder.checkCollisions = true;
             glassCone.checkCollisions = true;
 
             glassCone.physicsImpostor = new BABYLON.PhysicsImpostor(glassCone, BABYLON.PhysicsImpostor.MeshImpostor,
@@ -218,6 +211,51 @@
             $('#add-a-ball li').click(function () {
                 plugin.createBall($(this).text().trim().toLowerCase());
             });
+
+            function refreshcylender(cylindre){
+                glassCone.actionManager = new BABYLON.ActionManager(scene);
+                cylindre.material = wood;
+                cylindre.position.y = -2.4;
+                // Create the impostors on the cylinder and the cone so the balls will bounce of on them
+                cylindre.physicsImpostor = new BABYLON.PhysicsImpostor(cylindre, BABYLON.PhysicsImpostor.CylinderImpostor,
+                    { mass: 0, restitution: 0 }, scene);
+
+                cylindre.checkCollisions = true;
+
+                //glassCone.isPickable = true;
+            glassCone.actionManager
+            .registerAction(
+                new BABYLON.ExecuteCodeAction(
+                    BABYLON.ActionManager.OnLeftPickTrigger,
+                    function (){
+                        //glassCone.actionManager = new BABYLON.ActionManager(scene);
+                        console.log("1er click")
+                        
+                        cylindre.dispose();
+                        
+                    }
+                )
+            )
+            .then(
+                new BABYLON.ExecuteCodeAction(
+                    BABYLON.ActionManager.NothingTrigger,
+                    function () {
+                        
+                        console.log("2ieme click")
+                        
+                        var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 0.3, 4.4, 4.4, 50, 1, scene, false);
+                        
+                        refreshcylender(cylinder);
+                    }
+                )
+            );
+            }
+
+            refreshcylender(cylinder);
+            
+
+            
+       
 
         },
 
@@ -330,5 +368,7 @@
             }
         });
     };
+
+    
 
 })(jQuery, window, document);
