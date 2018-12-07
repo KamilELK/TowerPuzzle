@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Le pot de Jack</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font: 10pt Arial;
+        }
+
+        canvas {
+            outline: none;
+        }
+
+        .container {
+            width: auto;
+            margin: 20px;
+            border: 1px solid #ddd;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .style-choice {
+            width: 50%;
+            float: right;
+        }
+
+        #product-details {
+            width: 50%;
+            float: left;
+        }
+    </style>
+    <!-- Babylon.js -->
+    <script src="babylon.custom.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="game.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Le pot de Jack</h1>
+        <p>Cliquez sur un bouton pour ajouter une boule ou Déplacez le verre avec la souris</p>
+        <div class="style-choice">
+            <strong>Ajouter une boule en</strong>
+            <ul id="add-a-ball">
+                <li><button type="button">or</button></li>
+                <li><button type="button">argent</button></li>
+                <li><button type="button">rouge</button></li>
+            </ul>
+        </div>
+
+        <div id="product-detail">
+
+        </div>
+    </div>
+    <script>
+        $(window).ready(function () {
+            var plugin = $('#product-detail').kamilvictor();
+        });
+    </script>
+
+</body>
+
+</html>
