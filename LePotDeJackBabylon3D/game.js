@@ -99,12 +99,32 @@
             metalCube.cameraExposure = 0.66;
             metalCube.cameraContrast = 1.66;
 
+            var metalCubeBlack = new BABYLON.PBRMaterial("cube", scene);
+            metalCubeBlack.reflectionTexture = seamlessTexture;
+            metalCubeBlack.microSurface = 0.76;
+            metalCubeBlack.reflectivityColor = new BABYLON.Color3(0,0,0);
+            metalCubeBlack.albedoColor = new BABYLON.Color3(0,0,0);
+            metalCubeBlack.environmentIntensity = 0.85;
+            metalCubeBlack.cameraExposure = 0.66;
+            metalCubeBlack.cameraContrast = 1.66;
+
+            var metalCubePurpul = new BABYLON.PBRMaterial("cube", scene);
+            metalCubePurpul.reflectionTexture = seamlessTexture;
+            metalCubePurpul.microSurface = 0.76;
+            metalCubePurpul.reflectivityColor = new BABYLON.Color3(0.6, 0.6, 0.6);
+            metalCubePurpul.albedoColor = new BABYLON.Color3(0.552,0.062,0.89);
+            metalCubePurpul.environmentIntensity = 0.85;
+            metalCubePurpul.cameraExposure = 0.66;
+            metalCubePurpul.cameraContrast = 1.66;
+
             // Set the material properties so they can be accessed later
             this.gold = metal;
             this.red = metalRed;
             this.silver = metalSilver;
             this.glass = glass;
             this.cube = metalCube;
+            this.cubeBlack = metalCubeBlack;
+            this.cubePurpul = metalCubePurpul;
             
 
             // Set the scene up
@@ -234,6 +254,12 @@
                     break;
                 case 'cube':
                     this.balls.push(this.createCube(this.scene, this.cube, 0));
+                    break;
+                case 'cubeblack':
+                    this.balls.push(this.createCube(this.scene, this.cubeBlack, 0));
+                    break;
+                case 'cubepurpul':
+                    this.balls.push(this.createCube(this.scene, this.cubePurpul, 0));
                     break;
             }
         },
